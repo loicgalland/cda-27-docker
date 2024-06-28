@@ -1,6 +1,6 @@
 FROM node:17
 
-WORKDIR  /uapp
+WORKDIR  /app
 
 COPY package.json ./
 
@@ -8,6 +8,9 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 80
+RUN npm uninstall bcrypt && npm install bcrypt
+
+
+EXPOSE 3306
 
 CMD ["npm", "start"]

@@ -7,9 +7,9 @@ const pokemons = require('./mock-pokemon')
 let sequelize
 
 if(process.env.NODE_ENV === 'production') {
-  sequelize = new Sequelize('pokemon', 'root', '', {
-    host: 'database',
-    port: 3306,
+  sequelize = new Sequelize(process.env.MYSQL_DB, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mariadb',
     dialectOptions: {
       timezone: 'Etc/GMT-2',
@@ -17,10 +17,10 @@ if(process.env.NODE_ENV === 'production') {
     logging: true
   })
 } else {
-  sequelize = new Sequelize('pokemon', 'root', '', {
-    host: 'database',
+  sequelize = new Sequelize(process.env.MYSQL_DB, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
+    host: process.env.DB_HOST,
     dialect: 'mariadb',
-    port: 3306,
+    port: process.env.DB_PORT,
     dialectOptions: {
       timezone: 'Etc/GMT-2',
     },
